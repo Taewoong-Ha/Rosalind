@@ -1,4 +1,4 @@
-f = open('/Users/hataewoong/Downloads/rosalind_orf-5.txt', 'r')
+f = open('/Users/hataewoong/Downloads/rosalind_orf.txt', 'r')
 lines = f.readlines()
 dna_seq = ""
 for line in lines:
