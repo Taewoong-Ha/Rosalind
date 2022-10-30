@@ -1,57 +1,84 @@
-dna_seq = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
-rna_seq = ""
-for i in dna_seq:
-    if i == "T":
-        rna_seq += "U"
+f = open('/Users/hataewoong/Downloads/rosalind_orf-5.txt', 'r')
+lines = f.readlines()
+dna_seq = ""
+for line in lines:
+    line = line.split("\n")[0]
+    if line[0] == ">":
+        pass
     else:
-        rna_seq += i
+        dna_seq += line
 
-rna_codon = {}
-f = open('C:/Users/user/Desktop/Rosalind/RNA_codon_.txt', 'r')
+dna_seq_rev = ''
+for i in dna_seq[::-1]:
+    if i == "G":
+        dna_seq_rev += "C"
+    elif i == "C":
+        dna_seq_rev += "G"
+    elif i == "A":
+        dna_seq_rev += "T"
+    elif i == "T":
+        dna_seq_rev += "A"
+        
+stop = ['TAA','TAG','TGA']
+
+
+dna_codon = {}
+f = open('dan_codon_table.txt', 'r')
 lines = f.readlines()
 for line in lines:
     line = line.split("\t")
     line[1] = line[1].split('\n')
-    rna_codon [line[0]] = line[1][0]
-# print(rna_codon)
+    dna_codon [line[0]] = line[1][0]
+    
 
-# print(rna_seq)
+def ATG_index(seq):
+    a = seq.find("ATG")
+    atg_index = []
+    atg_index.append(a)
 
-a = rna_seq.find("AUG")
-start_index = []
-start_index.append(a)
-
-while rna_seq[a+1:].find("AUG") != -1:
-    a = rna_seq[a+1:].find("AUG") + a +1
-    start_index.append(a)
-    
-# print(start_index)
-
-for i in start_index:
-    print(i)
-    Protein = ""
-    split_mRNA = list(map(''.join, zip(*[iter(rna_seq[i:])] * length)))
-    print(split_mRNA)
-    for rna in split_mRNA:
-        for key in rna_codon.keys():
-            if key == rna:
-                if rna_codon[key] == "Stop":
-                    pass
-                
-                Protein += rna_codon[key]
-    print(Protein)
-    
-    
-    
-    
-rna_seq_reverse = ""
-for i in rna_seq[::-1]:
-    if i == "G":
-        rna_seq_reverse += "C"
-    elif i == "C":
-        rna_seq_reverse += "G"
-    elif i == "A":
-        rna_seq_reverse += "U"
-    elif i == "U":
-        rna_seq_reverse += "A"
+    while seq[a+1:].find("ATG") != -1:
+        a = seq[a+1:].find("ATG") + a +1
+        atg_index.append(a)
         
+    return atg_index
+
+
+def protin(index, seq):
+    protein = ""
+    breaker = False
+    break_point = "Stop"
+
+    split_dna = list(map(''.join, zip(*[iter(seq[index:])] * 3)))
+    for i in stop:
+        if i in split_dna:
+            for j in split_dna:
+                protein += dna_codon[j]
+                if dna_codon[j] == "Stop":
+                    breaker = True
+                    break
+            
+                else:
+                    protein += dna_codon[i]
+            if breaker == True:
+                break
+                
+        else: 
+            split_dna = []
+
+    if protein[-4:] != "Stop":
+        protein = ""
+    else:
+        protein = protein[0:-4]
+            
+            
+    return protein
+
+res = []
+for i in ATG_index(dna_seq):
+    res.append(protein(i, dna_seq))
+for j in ATG_index(dna_seq_rev):
+    res.append(protein(j, dna_seq_rev))
+
+res = set(res)    
+for k in res:
+    print(k)
