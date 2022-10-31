@@ -1,3 +1,4 @@
+# dataset 딕셔너리로 읽은 후 리스트로 전환
 seq = {}
 f = open('C:/Users/user/Downloads/rosalind_tran.txt','r')
 lines = f.readlines()
@@ -14,9 +15,12 @@ seq = list(seq.values())
 first_seq = seq[0]
 second_seq = seq[1]
 
+# 0 값 할당
 transition = 0 
 transversion = 0
 
+# 문제에 대한 값 지정
+# else: \n pass 이 부분은 제거해도 되지만 그냥 넣음
 for i in range(len(first_seq)):
     # print(i)
     if first_seq[i] == "A":
