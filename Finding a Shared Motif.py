@@ -20,7 +20,7 @@ def long_common_substring(seq1, seq2):
     
     # 이것도 안해도 되지만 함
     # 좀 더 쉬운건 
-    # common_seq = seq1[ (np.argmax(lcs) % (len(seq1) + 1 )) - ans: np.argmax(lcs) % (len(seq1) + 1 )]
+    # common_seq = seq1[ (np.argmax(lcs) % (len(seq1) + 1 )) - max(map(max, lcs)) : np.argmax(lcs) % (len(seq1) + 1 )]
     ans = 0
     while  True:
         x = lcs[np.argmax(lcs) // (len(seq1) + 1) - ans][np.argmax(lcs) % (len(seq1) + 1 ) - ans]
