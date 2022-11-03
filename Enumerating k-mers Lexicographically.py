@@ -6,10 +6,13 @@ lines = f.read().split()
 string = lines[:len(lines)-1]
 length = int(lines[-1])
 
-
+# itertools의 product를 사용
+# string을 length 만큼 반복
 for i in product(string, repeat = length):
-    # print(i)
+    # print(i) ('A', 'A', 'A') 이 형태
+    # 문자열
     k = ""
+    # AAA형태로 변환하기 위해서 또 다른 포문 사용
     for j in i:
         k = k + j
         if len(k) < length:
