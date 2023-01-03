@@ -1,5 +1,9 @@
-# Rosalind /n
-My solution /n
-ID:Tae Woong Ha (xodnd36) /n
-Time zone Asia: Seoul /n
+# Rosalind
+
+My solution 
+
+ID:Tae Woong Ha (xodnd36)
+
+Time zone Asia: Seoul 
+
 Language: Python
