@@ -22,7 +22,7 @@ def FrequentWords(text, k, t):
     frequentspatterns = list(set(frequentspatterns))
     return frequentspatterns
   
-  def FindClump(genome, k, L):
+def FindClump(genome, k, L):
     clump = []
     for i in range(0, len(genome) - L + 1):
         sub = genome[i:i+L]
