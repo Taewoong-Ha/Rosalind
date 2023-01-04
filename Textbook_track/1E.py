@@ -40,3 +40,12 @@ def FrequentWords(text, k, t):
         else:
             unique = unique + aa + " "
     return print(unique)
+
+
+
+genome = input()
+k = int(input())
+L = int(input())
+t = int(input())
+
+FindClump(genome, k, L)
