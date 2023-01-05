@@ -1,4 +1,7 @@
 import re
+import time
+
+start = time.time()  # 시작 시간 저장
 
 def PatternCount(text, pattern):
     count = 0
@@ -49,3 +52,5 @@ L = int(input())
 t = int(input())
 
 FindClump(genome, k, L)
+
+print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
