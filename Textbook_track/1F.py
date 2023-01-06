@@ -4,35 +4,33 @@
 # G = +1, C = -1
 # 0 -1 -1 -1 0 1 2 1 1 1 0 1 2 1 0 0 0 0 -1 0 -1 -2
 
-import numpy as np
-
-        
-        
 def Skew(genome):
-    count_str = [0]
-    count = 0 
+    skew = [0]
     for i in range(len(genome)):
         if genome[i] == "G":
-            count += 1
-            count_str.append(count)
+            skew.append(skew[-1] + 1)
         elif genome[i] == "C":
-            count -= 1
-            count_str.append(count)
+            skew.append(skew[-1] - 1)
         else:
-            count_str.append(count_str[i-1])
-    pos = np.where(np.array(count_str) == min(count_str))[0]
-    return  pos
+            skew.append(skew[-1])
+    min_skew = min(skew)
 
-def print_Skew(genome):
-    aa = Skew(genome)
-    a = ""
-    for i in aa:
-        a = a + str(i) + " "
-    print(a)
+    for i in range(len(skew)):
+        if skew[i] == min_skew:
+            print(i, end = " ")
+    return 
 
-genome = input()
-
-print_Skew(genome)
-
+if __name__ == "__main__":
+    '''
+    Given: A DNA string Genome.
+    Return: All integer(s) i minimizing Skew(Prefixi (Text)) over all values of i (from 0 to |Genome|).
+    Sample Dataset: "CCTATCGGTGGATTAGCATGTCCCTGTACGTTTCGCCGCGAACTAGTTCACACGGCTTGATGGCAAATGGTTTTTCCGGCGACCGTAATCGTCCACCGAG"
+    Sample Output: 53 97
+    input1: 11 24 | input2: 3 | input3: 4 | input4: 2 | input5: 2 6 | input6: 89969 89970 89971 90345 90346
+    '''
+    with open("C:/Users/user/Downloads/rosalind_ba1f.txt", "r") as f:
+        genome = f.readline().strip()
+        
+    Skew(genome)
 
     
