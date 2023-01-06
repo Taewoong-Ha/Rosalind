@@ -1,6 +1,6 @@
-import re
-import time
-import sys
+import re    # 특수 문자 제거할 때 사용 ex) a = re.sub('[^a-zA-Z0-9]',' ',a).strip()
+import time  # 실행 시간 측정할 때 사용
+import sys   # input을 입력할때 사용 가능  ex) a = sys.stdin.readline().split()
 
 start = time.time()  # 시작 시간 저장
 
