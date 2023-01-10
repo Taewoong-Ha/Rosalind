@@ -15,7 +15,8 @@
 
 '''나의 선택 factorial & N보다 적게 나타날 확률
 '''
-import math
+import math. # factorial을 쓰기위해 math 모듈 import
+from scipy.special import binom # 이항분포인 binom을 사용하기 위해 scipy 모듈 import
 
 def nCr(n, k):
     f = math.factorial
