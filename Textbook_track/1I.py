@@ -35,7 +35,7 @@ def d_mismatch_most_freq_kmer(text, k, d):
         freq_kmer[kmer] = 0
         for i in range(len(text) - k + 1):
             sub = text[i : i + k]
-            if hammingDistance(kmer, sub) <= d:
+            if Hamming_Distance(kmer, sub) <= d:
                 freq_kmer[kmer] += 1
     most_kmer = [ key for key, val in freq_kmer.items() if max(freq_kmer.values()) == val]
             
