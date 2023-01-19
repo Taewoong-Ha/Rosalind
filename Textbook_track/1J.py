@@ -1,18 +1,3 @@
-'''
-Frequent Words with Mismatches Problem
-Find the most frequent k-mers with mismatches in a string.
-Given: A string Text as well as integers k and d.
-Return: All most frequent k-mers with up to d mismatches in Text.
-
-Sampel Dataset
-ACGTTGCATGTCGCATGATGCATGAGAGCT
-4 1
-
-Sample output
-ATGT ACAT
-
-'''
-
 import itertools
 from Bio.Seq import Seq
 
@@ -28,11 +13,6 @@ def Hamming_Distance(p, q):
 
 def d_mismatch_most_freq_kmer(text, k, d):
     
-    if not k <= 12 and k >= 1:
-        raise ValueError("motif_length must be between 0 and 12. {} was passed.".format(k))
-    if not d <= 3 and d >= 1:
-        raise ValueError("max_mismatch must be between 0 and 3. {} was passed.".format(d))
-
     freq_kmer = {}
     kmers = list(map(''.join, itertools.product('ACGT', repeat=k)))
     
@@ -42,21 +22,26 @@ def d_mismatch_most_freq_kmer(text, k, d):
             sub = text[i : i + k]
             if Hamming_Distance(kmer, sub) <= d: #
                 freq_kmer[kmer] += 1
-            elif Hamming_Distance(Seq(kmer).reverse_complement(), sub) <= d:
+            # elif Hamming_Distance(Seq(kmer).reverse_complement(), sub) <= d:
+            #     freq_kmer[kmer] += 1
+                
+        for i in range(len(text) - k + 1):
+            sub = text[i : i + k]
+            if Hamming_Distance(Seq(kmer).reverse_complement(), sub) <= d:
                 freq_kmer[kmer] += 1
+
 
     most_kmer = [ key for key, val in freq_kmer.items() if max(freq_kmer.values()) == val]
             
     return  most_kmer
 
 if __name__ == "__main__":
-#     text = input()
-#     k = int(input())
-#     d = int(input())
-
-    
-    text = "ACGTTGCATGTCGCATGATGCATGAGAGCT"
-    k = 4
-    d = 1
+    with open("C:/Users/user/Downloads/rosalind_ba1j (1).txt", "r") as f:
+        lines = f.readlines()
+        text = lines[0].strip('\n')
+        dd = lines[1].strip('\n').split(' ')
+        k = int(dd[0])
+        d = int(dd[1])
+ 
 #     print(d_mismatch_most_freq_kmer(text, k, d))
     print(" ".join(map(str, d_mismatch_most_freq_kmer(text, k, d))))
