@@ -75,6 +75,11 @@ def NumToSymbol(num):
 def NumToPattern(index, k):
     if k == 1:
         return NumToSymbol(index)
+    prefix_index = index // 4
+    r = index % 4
+    symbol = NumToSymbol(r)
+    prefix_pattern = NumToPattern(prefix_index, k - 1)
+    return symbol
   
   
 
